@@ -24,6 +24,7 @@ setup(name='fanstatic.deform',
       include_package_data=True,
       zip_safe=False,
       test_suite="fanstaticdeform.tests.Tests",
+      tests_require=['js.extjs'],
       install_requires=[
             'deform',
             'fanstatic',
@@ -32,7 +33,9 @@ setup(name='fanstatic.deform',
             'js.tinymce'
           # -*- Extra requirements: -*-
       ],
-      entry_points="""
-      # -*- Entry points: -*-
-      """,
-      )
+      entry_points={
+      'fanstatic.libraries': [
+          'deform = fanstaticdeform:deform_library',
+          ],
+      },
+)

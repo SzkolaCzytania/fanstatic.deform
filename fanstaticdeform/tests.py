@@ -1,5 +1,6 @@
 from js.jquery import jquery
 from js.jqueryui import trontastic
+from js.extjs import extjs
 import colander
 import deform
 import doctest
@@ -75,6 +76,14 @@ class Unittests(unittest.TestCase):
         deform_resource.needsFor(form, jqueryui_theme = trontastic)
         self.assertFalse('trontastic' in\
                           str(fanstatic.get_needed().resources()))
+
+    def testRequirementRegistration(self):
+        required_resource = extjs.all
+        deform_resource.register('extjs', None, required_resource)
+        form = self.getHeavyForm()
+        form.widget.requirements.append(('extjs', None))
+        deform_resource.needsFor(form)
+        self.assertEquals(12, len(fanstatic.get_needed().resources()))
 
 deform_form = deform.Form(colander.Schema())
 deform_form.widget.requirements = list(deform_form.widget.requirements)

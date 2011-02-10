@@ -41,10 +41,16 @@ also choose not to include a theme, or select your own:
 If you explicitly not want to include a theme, pass None as jqueryui_theme.
 
 If you have created your own widgets with unique requirements, the library
-will not know how to handle them. Please add these resources on your own.
-If you try to use the method with custom requirements, an exception gets thrown.
-But you can still use the framework by pass your custom requirements into an
-ignore list:
+will not know how to handle them out of the box.
+Either you register your resources, or you add the requirements to the ignore
+list:
 
     >>> addRequirement(deform_form, 'global_observer')
     >>> deform_resource.needsFor(deform_form, ignores = ['global_observer'])
+
+    >>> addRequirement(deform_form, 'extjs')
+    >>> from js.extjs import extjs
+    >>> deform_resource.register('extjs', None, extjs.all)
+    >>> deform_resource.needsFor(deform_form, ignores = ['global_observer'])
+    >>> len(resourcesFanstaticWillLoad())
+    11
