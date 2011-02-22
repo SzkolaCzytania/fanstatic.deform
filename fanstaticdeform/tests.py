@@ -9,8 +9,8 @@ import unittest
 
 from fanstaticdeform import deform_resource
 
-HEAVY_FORM_RESOURCES = "[<Resource 'themes/ui-lightness/jquery-ui.css' in library 'jqueryui'>, <Resource 'form.css' in library 'deform'>, <Resource 'theme.css' in library 'deform'>, <Resource 'jquery.js' in library 'jquery'>, <Resource 'ui/jquery-ui.js' in library 'jqueryui'>, <Resource 'jquery.form.js' in library 'deform'>, <Resource 'deform.js' in library 'deform'>, <Resource 'jquery.maskedinput-1.2.2.min.js' in library 'deform'>, <Resource 'tiny_mce_src.js' in library 'tinymce'>]"
-MINIMAL_FORM_RESOURCES = "[<Resource 'form.css' in library 'deform'>, <Resource 'theme.css' in library 'deform'>, <Resource 'jquery.js' in library 'jquery'>, <Resource 'jquery.form.js' in library 'deform'>, <Resource 'deform.js' in library 'deform'>]"
+HEAVY_FORM_RESOURCES = "[<Resource 'themes/ui-lightness/jquery-ui.css' in library 'jqueryui'>, <Resource 'form.css' in library 'deform'>, <Resource 'jquery.js' in library 'jquery'>, <Resource 'ui/jquery-ui.js' in library 'jqueryui'>, <Resource 'jquery.form.js' in library 'deform'>, <Resource 'deform.js' in library 'deform'>, <Resource 'jquery.maskedinput-1.2.2.min.js' in library 'deform'>, <Resource 'tiny_mce_src.js' in library 'tinymce'>]"
+MINIMAL_FORM_RESOURCES = "[<Resource 'form.css' in library 'deform'>, <Resource 'jquery.js' in library 'jquery'>, <Resource 'jquery.form.js' in library 'deform'>, <Resource 'deform.js' in library 'deform'>]"
 
 class Unittests(unittest.TestCase):
 
@@ -83,7 +83,7 @@ class Unittests(unittest.TestCase):
         form = self.getHeavyForm()
         form.widget.requirements.append(('extjs', None))
         deform_resource.needsFor(form)
-        self.assertEquals(12, len(fanstatic.get_needed().resources()))
+        self.assertEquals(11, len(fanstatic.get_needed().resources()))
 
 deform_form = deform.Form(colander.Schema())
 deform_form.widget.requirements = list(deform_form.widget.requirements)

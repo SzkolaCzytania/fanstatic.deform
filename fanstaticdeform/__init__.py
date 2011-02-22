@@ -14,7 +14,6 @@ jquery_maskedinput = Resource(deform_library,\
 
 deform_req = GroupResource([
         Resource(deform_library, 'form.css'),
-        Resource(deform_library, 'theme.css'),
         Resource(deform_library, 'deform.js', depends=[jquery, jquery_form])
                            ])
 def getDefaultRegistry():

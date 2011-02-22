@@ -20,7 +20,7 @@ In its simplest form, you use it like that:
     0
     >>> deform_resource.needsFor(deform_form)
     >>> len(resourcesFanstaticWillLoad())
-    5
+    4
 
 Now all resources will get injected.
 
@@ -32,7 +32,7 @@ also choose not to include a theme, or select your own:
     >>> from js.jqueryui import trontastic
     >>> deform_resource.needsFor(deform_form, jqueryui_theme = trontastic)
     >>> len(resourcesFanstaticWillLoad())
-    7
+    6
     >>> 'trontastic' in str(resourcesFanstaticWillLoad())
     True
     >>> 'lightness' in str(resourcesFanstaticWillLoad())
@@ -53,4 +53,4 @@ list:
     >>> deform_resource.register('extjs', None, extjs.all)
     >>> deform_resource.needsFor(deform_form, ignores = ['global_observer'])
     >>> len(resourcesFanstaticWillLoad())
-    11
+    10

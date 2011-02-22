@@ -1,16 +1,22 @@
-.wufoo .req{
+.deform .req{
    color: red;
 }
 
-.wufoo label{
+.deform label.desc{
     display: block;
+    font-weight:bold;
 }
 
-.wufoo li {
+.deform ul {
+    margin: 0;
+    padding: 0;
+}
+
+.deform li {
     clear: left;
     display: block;
-    margin: 0;
-    padding: 6px 5px 9px 9px;
+    margin: 6px 0px;
+    padding: 3px;
 }
 
 /* deform additions*/
@@ -38,16 +44,30 @@ div.deformReplaces {
     float: left;
 }
 
-/* css_class test */
-form .deformWidgetWithStyle{
-    width:100px;
-    margin:0;
-    padding: 10px;
-    border: 2px solid #71a23c;
-    background-color: #fff7c0;
-    font-weight: bold;
-}
-
 .deformSet-item {
     padding: 1px;
+}
+
+.deform ul.inline > li{
+    display:inline-block;
+}
+
+/* error handling */
+.deform .errorLi {
+    border:1px solid red;
+    text-align: center;
+    -webkit-border-radius:20px;
+    -moz-border-radius:20px;
+}
+
+.deform li.error{
+    background-color: #FFDFDF;
+}
+
+.deform li.error label.desc, .deform p.error, deform h3.errorMsgLbl{
+    color: #DF0000;
+}
+
+.deform p.error{
+    font-size: 70%;
 }
