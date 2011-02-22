@@ -51,10 +51,10 @@ class deform_resource(object):
                 continue
             requirements = cls.registry.get(requirement, {}).get(version, None)
             if requirements is None:
-                raise AttributeError("Unknown requirements. import them "
+                raise AttributeError("Unknown requirement '%s'. import them "
                                      "on your own and add them to the "
                                      "ignore list or register them via "
-                                     "deform_resource.register")
+                                     "deform_resource.register" % requirement)
             else:
                 for requirement in requirements:
                     requirement.need()
