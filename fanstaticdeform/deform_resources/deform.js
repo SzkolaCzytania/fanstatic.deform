@@ -41,7 +41,7 @@ var deform  = {
 
         var fieldmatch = /deformField(\d+)/;
         var namematch = /(.+)?-[#]{3}/;
-        var code = protonode.attributes['prototype'].value;
+        var code = protonode.attr('prototype');
         var html = decodeURIComponent(code);
         var $htmlnode = $(html);
         var $idnodes = $htmlnode.find('[id]');
@@ -87,15 +87,54 @@ var deform  = {
             });
 
         deform.clearCallbacks();
+        var old_len = parseInt(before.attr('now_len')||'0');
+        before.attr('now_len', old_len + 1);
         //deform.maybeScrollIntoView('#' + anchorid);
     },
 
-    appendSequenceItem: function(start_node) {
-      deform.addSequenceItem(
-          $(start_node).parent().children('.deformProto')[0],
-          $(start_node).parent().children('.deformInsertBefore')[0]
-      );
-      return false;
+    appendSequenceItem: function(node) {
+        var $oid_node = $(node).parent();
+        var $proto_node = $oid_node.children('.deformProto').first();
+        var $before_node = $oid_node.children('ul').first().children(
+                                              '.deformInsertBefore');
+        var min_len = parseInt($before_node.attr('min_len')||'0');
+        var max_len = parseInt($before_node.attr('max_len')||'9999');
+        var now_len = parseInt($before_node.attr('now_len')||'0');
+        if (now_len < max_len) {
+            deform.addSequenceItem($proto_node, $before_node);
+            deform.processSequenceButtons($oid_node, min_len, max_len, 
+                                          now_len+1);
+        };
+        return false;
+    },
+
+    removeSequenceItem: function(clicked) {
+        var $item_node = $(clicked).parent();
+        var $oid_node = $item_node.parent().parent();
+        var $before_node = $oid_node.find('.deformInsertBefore').first();
+        var min_len = parseInt($before_node.attr('min_len')||'0');
+        var max_len = parseInt($before_node.attr('max_len')||'9999');
+        var now_len = parseInt($before_node.attr('now_len')||'0');
+        if (now_len > min_len) {
+            $before_node.attr('now_len', now_len - 1);
+            $item_node.remove();
+            deform.processSequenceButtons($oid_node, min_len, max_len, 
+                                          now_len-1);
+        };
+        return false;
+    },
+
+    processSequenceButtons: function(oid_node, min_len, max_len, now_len) {
+        var $ul = oid_node.children('ul');
+        var $lis = $ul.children('li');
+        $lis.find('.deformClosebutton').removeClass('deformClosebuttonActive');
+        oid_node.children('.deformSeqAdd').show();
+        if (now_len > min_len) {
+            $lis.find('.deformClosebutton').addClass('deformClosebuttonActive');
+        };
+        if (now_len >= max_len) {
+            oid_node.children('.deformSeqAdd').hide();
+        };
     },
 
     maybeScrollIntoView: function(element_id) {
